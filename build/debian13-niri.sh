@@ -6,6 +6,10 @@ apt install -y pkg-config rustc cargo libwayland-dev libxkbcommon-dev libgbm-dev
 apt install -y libpipewire-0.3-0 libpipewire-0.3-dev libdisplay-info2 libseat1 libinput10 libegl1 libegl-mesa0 rustup libdisplay-info-dev
 
 curl -fsSL http://192.168.13.80:3000/sleechengn/github.com--niri-wm--niri > /dev/null 2>&1
+git config --global --list | grep -F insteadOf | while IFS='=' read -r name value
+do
+  git config --global --unset $name
+done
 if [ $? -eq 0 ]; then
 	git config --global url."http://192.168.13.80:3000/sleechengn/github.com--niri-wm--niri.git".insteadOf https://github.com/niri-wm/niri.git
 fi
