@@ -51,7 +51,9 @@ systemctl daemon-reload
 systemctl disable getty@tty1.service
 systemctl enable getty@tty1.service
 mkdir -p $home/.config/niri
-cp $PACK_PATH/default-config.kdl $home/.config/niri/config.kdl
+if [ ! -e "$home/.config/niri/config.kdl" ]; then
+	cp $PACK_PATH/default-config.kdl $home/.config/niri/config.kdl
+fi
 chown -R $USERNAME $home/.config
 
 systemctl --user -M $USERNAME@ daemon-reload
