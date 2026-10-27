@@ -28,20 +28,31 @@ flatpak install --noninteractive -y com.microsoft.Edge
 apt install -y fonts-noto-cjk-extra
 apt install -y fcitx5 fcitx5-table-wubi98
 
-# user
-if ! id "$USERNAME" > /dev/null 2>&1; then
-	useradd -m --uid 100000 $USERNAME
-	usermod -aG input,video $USERNAME
-	home=$(eval echo "~$USERNAME")
-	echo "$USERNAME:$PASSWORD" | chpasswd
-	find /usr/lib/|grep -F /getty@|xargs -i sed -i "s,^ExecStart.*,ExecStart=-/sbin/agetty --noclear %I $TERM --autologin $USERNAME,g" {}
-	systemctl daemon-reload
-	systemctl disable getty@tty1.service
-	systemctl enable getty@tty1.service
-	mkdir -p $home/.config/niri
-	cp $PACK_PATH/default-config.kdl $home/.config/niri/config.kdl
-	chown -R $USERNAME $home/.config
+if ! getent group $USERNAME > /dev/null 2>&1; then
+        groupadd --gid 100000 $USERNAME
+else
+        if [ ! $(getent group $USERNAME|cut -d: -f3) -eq 100000 ]; then
+                groupmod --gid 100000 $USERNAME
+        fi
 fi
+
+if ! id -u $USERNAME > /dev/null 2>&1; then
+        useradd -m --uid 100000 -g $USERNAME $USERNAME
+else
+        if [ ! $(id -g $USERNAME) -eq 100000 ]; then
+                usermod --gid 100000 $USERNAME
+        fi
+fi
+usermod -aG input,video $USERNAME
+home=$(eval echo "~$USERNAME")
+echo "$USERNAME:$PASSWORD" | chpasswd
+find /usr/lib/|grep -F /getty@|xargs -i sed -i "s,^ExecStart.*,ExecStart=-/sbin/agetty --noclear %I $TERM --autologin $USERNAME,g" {}
+systemctl daemon-reload
+systemctl disable getty@tty1.service
+systemctl enable getty@tty1.service
+mkdir -p $home/.config/niri
+cp $PACK_PATH/default-config.kdl $home/.config/niri/config.kdl
+chown -R $USERNAME $home/.config
 
 systemctl --user -M $USERNAME@ daemon-reload
 systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
