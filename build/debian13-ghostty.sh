@@ -34,6 +34,7 @@ git clone https://github.com/ghostty-org/ghostty
 cd ghostty
 git checkout v1.4.0
 
+rm -rf /root/.cache/zig/o
 zig build -Doptimize=ReleaseFast -Dtarget=x86_64-linux-gnu
 
 rm -rf deb-pkg
