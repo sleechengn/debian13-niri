@@ -61,7 +61,7 @@ systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
 su $USERNAME -c "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
 
 if ! grep -E -e "^$USERNAME[[:blank:]]+ALL\\=\\(ALL\\:ALL\\)[[:blank:]]+NOPASSWD:ALL.*" /etc/sudoers > /dev/null; then
-        sed -i "/^root[[:blank:]]\\+ALL=(ALL:ALL)[[:blank:]]\\+.*/a $USERNAME ALL=(ALL:ALL) NOPASSWD:ALL" /etc/sudoers
+        sed -i "/^root[[:blank:]]\\+ALL=(ALL:ALL)[[:blank:]]\\+.*/a $USERNAME   ALL=(ALL:ALL)   NOPASSWD:ALL" /etc/sudoers
 fi
 
 echo
