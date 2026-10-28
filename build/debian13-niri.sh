@@ -11,6 +11,7 @@ curl -fsSL http://192.168.13.80:3000/sleechengn/github.com--niri-wm--niri > /dev
 if [ $? -eq 0 ]; then
 	git config --global url."http://192.168.13.80:3000/sleechengn/github.com--niri-wm--niri.git".insteadOf https://github.com/niri-wm/niri.git
 fi
+cd /opt
 if [ -e "niri" ]; then rm -rf niri; fi
 git clone https://github.com/niri-wm/niri.git
 cd niri
