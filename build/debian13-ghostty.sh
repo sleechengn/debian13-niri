@@ -11,23 +11,30 @@ curl -fsSL http://192.168.13.80:3000/sleechengn/github.com--ghostty-org--ghostty
 if [ $? -eq 0 ]; then
 	git config --global url."http://192.168.13.80:3000/sleechengn/github.com--ghostty-org--ghostty".insteadOf  https://github.com/ghostty-org/ghostty
 fi
-rm -rf /opt/zig
-mkdir -p /opt/zig
-cd /opt/zig
-aria2c -x 10 -j 10 -k 1M https://ziglang.org/download/0.17.0/zig-x86-linux-0.17.0.tar.xz
-xz -d zig-x86-linux-0.17.0.tar.xz
-tar -xvf zig-x86-linux-0.17.0.tar
-rm -rf zig-x86-linux-0.17.0.tar
 
-PATH=$PATH:/opt/zig/$(ls -A .)
+if [ "$(ls -A /opt/zig)" ]; then
 
+    PATH=$PATH:/opt/zig/$(ls -A /opt/zig)
+
+else
+
+    rm -rf /opt/zig
+    mkdir -p /opt/zig
+    cd /opt/zig
+    aria2c -x 10 -j 10 -k 1M https://ziglang.org/download/0.17.0/zig-x86-linux-0.17.0.tar.xz
+    xz -d zig-x86-linux-0.17.0.tar.xz
+    tar -xvf zig-x86-linux-0.17.0.tar
+    rm -rf zig-x86-linux-0.17.0.tar
+    PATH=$PATH:/opt/zig/$(ls -A .)
+
+fi
 cd /opt
 rm -rf ghostty
 git clone https://github.com/ghostty-org/ghostty
 cd ghostty
 git checkout v1.4.0
 
-zig build -Doptimize=ReleaseFast
+zig build -Doptimize=ReleaseFast -Dtarget=x86_64-linux-gnu
 
 rm -rf deb-pkg
 mkdir -p deb-pkg/DEBIAN
@@ -35,7 +42,7 @@ mkdir -p deb-pkg/usr/local
 cp -r zig-out/* deb-pkg/usr/local/
 
 #编辑deb-pkg/DEBIAN/control
-bash
+#bash
 cat > deb-pkg/DEBIAN/control <<EOF
 Package: ghostty
 Version: 0.1.0-1
@@ -49,7 +56,7 @@ Description: Ghostty Terminal Emulator
 EOF
 cat deb-pkg/DEBIAN/control
  
-dpkg-deb --build deb-pkg ghostty_0.1.0-1_amd64.deb
+dpkg-deb --build deb-pkg ghostty_1.4.0_amd64.deb
 #运行依赖：
 #apt install libgtk4-layer-shell0
 #TERM=xterm-256color
