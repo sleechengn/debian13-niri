@@ -20,7 +20,7 @@ apt install -y alacritty fuzzel swaybg waybar pcmanfm-qt xwayland
 apt install -y libpipewire-0.3-0 libpipewire-0.3-dev libdisplay-info2 libseat1 libinput10 libegl1 libegl-mesa0
 apt install -y pavucontrol pipewire pipewire-pulse wireplumber libgtk4-layer-shell0
 apt install -y libadwaita-1-0
-apt install -y flatpak
+apt install -y flatpak sudo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub
 flatpak install --noninteractive -y com.microsoft.Edge
@@ -59,6 +59,10 @@ chown -R $USERNAME $home/.config
 systemctl --user -M $USERNAME@ daemon-reload
 systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
 su $USERNAME -c "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
+
+if ! grep -E -e "^$USERNAME[[:blank:]]+ALL\\=\\(ALL\\:ALL\\)[[:blank:]]+NOPASSWD:ALL.*" /etc/sudoers > /dev/null; then
+        sed -i "/^root[[:blank:]]\\+ALL=(ALL:ALL)[[:blank:]]\\+.*/a $USERNAME ALL=(ALL:ALL) NOPASSWD:ALL" /etc/sudoers
+fi
 
 echo
 echo ----------------------
