@@ -37,7 +37,8 @@ git checkout v1.4.0
 rm -rf /root/.cache/zig
 #zig fetch "https://deps.files.ghostty.org/vaxis-6fd944a27fb3d6f596e981076381a3131f2448b4.tar.gz"
 #zig fetch "https://deps.files.ghostty.org/z2d-40af3e84a4e15a9f31d126b3f281f23ce6a3dae5.tar.gz"
-zig build -Doptimize=ReleaseFast  # zig build -Doptimize=ReleaseFast -Dtarget=x86_64-linux-gnu
+# zig build -Doptimize=ReleaseFast -Dtarget=x86_64-linux-gnu
+zig build -Doptimize=ReleaseFast  
 
 rm -rf deb-pkg
 mkdir -p deb-pkg/DEBIAN
