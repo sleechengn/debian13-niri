@@ -60,7 +60,7 @@ Description: Ghostty Terminal Emulator
  Fast, feature-rich, GPU-accelerated terminal emulator written in Zig.
 EOF
 cat deb-pkg/DEBIAN/control
- 
+
 dpkg-deb --build deb-pkg ghostty_1.4.0_amd64.deb
 #运行依赖：
 #apt install libgtk4-layer-shell0
