@@ -69,7 +69,6 @@ systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
 systemctl --user -M $USERNAME@ start pipewire pipewire-pulse wireplumber
 su $USERNAME -c "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
 
-
 echo
 echo ----------------------
 echo "your username: $USERNAME"
