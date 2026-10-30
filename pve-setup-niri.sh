@@ -16,11 +16,12 @@ apt install -y $PACK_PATH/swww-daemon_0.11.2~master2-1_amd64.deb
 apt install -y $PACK_PATH/xwayland-satellite_0.8.2-1_amd64.deb
 apt install -y $PACK_PATH/ghostty_0.1.0-1_amd64.deb
 
+apt install -y sudo bluez blueman pipewire-audio libspa-0.2-bluetooth
 apt install -y alacritty fuzzel swaybg waybar pcmanfm-qt xwayland
 apt install -y libpipewire-0.3-0 libpipewire-0.3-dev libdisplay-info2 libseat1 libinput10 libegl1 libegl-mesa0
 apt install -y pavucontrol pipewire pipewire-pulse wireplumber libgtk4-layer-shell0
 apt install -y libadwaita-1-0
-apt install -y flatpak sudo
+apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub
 flatpak install --noninteractive -y com.microsoft.Edge
@@ -65,6 +66,7 @@ if ! grep -E -e "^$USERNAME[[:blank:]]+ALL\\=\\(ALL\\:ALL\\)[[:blank:]]+NOPASSWD
 fi
 systemctl --user -M $USERNAME@ daemon-reload
 systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
+systemctl --user -M $USERNAME@ start pipewire pipewire-pulse wireplumber
 su $USERNAME -c "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
 
 
