@@ -16,7 +16,7 @@ apt install -y $PACK_PATH/swww-daemon_0.11.2~master2-1_amd64.deb
 apt install -y $PACK_PATH/xwayland-satellite_0.8.2-1_amd64.deb
 apt install -y $PACK_PATH/ghostty_0.1.0-1_amd64.deb
 
-apt install -y sudo bluez blueman pipewire-audio libspa-0.2-bluetooth
+apt install -y sudo bluez blueman pipewire-audio libspa-0.2-bluetooth xdg-desktop-portal xdg-desktop-portal-gtk
 apt install -y alacritty fuzzel swaybg waybar pcmanfm-qt xwayland
 apt install -y libpipewire-0.3-0 libpipewire-0.3-dev libdisplay-info2 libseat1 libinput10 libegl1 libegl-mesa0
 apt install -y pavucontrol pipewire pipewire-pulse wireplumber libgtk4-layer-shell0
@@ -68,6 +68,18 @@ systemctl --user -M $USERNAME@ daemon-reload
 systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
 systemctl --user -M $USERNAME@ start pipewire pipewire-pulse wireplumber
 su $USERNAME -c "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
+
+systemctl --user -M $USERNAME@ enable --now xdg-desktop-portal xdg-desktop-portal-gtk
+systemctl --user -M $USERNAME@ start xdg-desktop-portal xdg-desktop-portal-gtk
+
+mkdir -p $home/.config/xdg-desktop-portal
+cat > $home/.config/xdg-desktop-portal/niri-portals.conf <<EOF
+[preferred]
+default=gtk;
+org.freedesktop.impl.portal.FileChooser=gtk;
+org.freedesktop.impl.portal.OpenURI=gtk;
+EOF
+chown -R $USERNAME:$USERNAME $home/.config
 
 echo
 echo ----------------------
