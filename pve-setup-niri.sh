@@ -60,7 +60,7 @@ mkdir -p $home/.config/niri
 if [ ! -e "$home/.config/niri/config.kdl" ]; then
 	cp $PACK_PATH/default-config.kdl $home/.config/niri/config.kdl
 fi
-chown -R $USERNAME $home/.config
+chown -R $USERNAME:$USERNAME $home/.config
 if ! grep -E -e "^$USERNAME[[:blank:]]+ALL\\=\\(ALL\\:ALL\\)[[:blank:]]+NOPASSWD:ALL.*" /etc/sudoers > /dev/null; then
         sed -i "/^root[[:blank:]]\\+ALL=(ALL:ALL)[[:blank:]]\\+.*/a $USERNAME   ALL=(ALL:ALL)   NOPASSWD:ALL" /etc/sudoers
 fi
