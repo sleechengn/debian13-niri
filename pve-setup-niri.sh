@@ -40,13 +40,15 @@ fi
 if ! id -u $USERNAME > /dev/null 2>&1; then
         useradd -m --uid 100000 -g $USERNAME $USERNAME
 else
-        if [ ! $(id -g $USERNAME) -eq 100000 ]; then
-                #usermod --gid 100000 $USERNAME
+        if [ ! $(id -u $USERNAME) -eq 100000 ]; then
                 PREFIX=$(grep -o "^$USERNAME:[^:]\\+:[0-9]\\+" /etc/passwd)
                 USER_F1=$(echo "$PREFIX"|awk '{print $1}')
                 USER_F2=$(echo "$PREFIX"|awk '{print $2}')
                 sed -i "s/^$USERNAME:[^:]\\+:[0-9]\\+/$USER_F1:$USER_F2:100000/g" /etc/passwd
                 chown -R 100000:100000 /home/$USERNAME
+        fi
+        if [ ! $(id -g $USERNAME) -eq 100000 ]; then
+                usermod --gid 100000 $USERNAME
         fi
 fi
 usermod -aG input,video $USERNAME
