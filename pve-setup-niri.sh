@@ -71,9 +71,6 @@ systemctl --user -M $USERNAME@ enable --now pipewire pipewire-pulse wireplumber
 systemctl --user -M $USERNAME@ start pipewire pipewire-pulse wireplumber
 su $USERNAME -c "gsettings set org.gnome.desktop.interface color-scheme prefer-dark"
 
-systemctl --user -M $USERNAME@ enable --now xdg-desktop-portal xdg-desktop-portal-gtk
-systemctl --user -M $USERNAME@ start xdg-desktop-portal xdg-desktop-portal-gtk
-
 mkdir -p $home/.config/xdg-desktop-portal
 cat > $home/.config/xdg-desktop-portal/niri-portals.conf <<EOF
 [preferred]
@@ -81,7 +78,11 @@ default=wlr;gtk;
 org.freedesktop.impl.portal.FileChooser=gtk;
 org.freedesktop.impl.portal.OpenURI=gtk;
 EOF
+
 chown -R $USERNAME:$USERNAME $home/.config
+systemctl --user -M $USERNAME@ enable --now xdg-desktop-portal-wlr xdg-desktop-portal xdg-desktop-portal-gtk
+systemctl --user -M $USERNAME@ start xdg-desktop-portal-wlr xdg-desktop-portal xdg-desktop-portal-gtk
+
 
 echo
 echo ----------------------
