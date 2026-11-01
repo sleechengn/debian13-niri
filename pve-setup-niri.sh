@@ -19,7 +19,7 @@ apt install -y $PACK_PATH/ghostty_0.1.0-1_amd64.deb
 apt install -y sudo bluez blueman pipewire-audio libspa-0.2-bluetooth xdg-desktop-portal xdg-desktop-portal-gtk
 apt install -y alacritty fuzzel swaybg waybar pcmanfm-qt xwayland
 apt install -y libpipewire-0.3-0 libpipewire-0.3-dev libdisplay-info2 libseat1 libinput10 libegl1 libegl-mesa0
-apt install -y pavucontrol pipewire pipewire-pulse wireplumber libgtk4-layer-shell0
+apt install -y pavucontrol pipewire pipewire-pulse wireplumber libgtk4-layer-shell0 xdg-desktop-portal-wlr
 apt install -y libadwaita-1-0
 apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -77,7 +77,7 @@ systemctl --user -M $USERNAME@ start xdg-desktop-portal xdg-desktop-portal-gtk
 mkdir -p $home/.config/xdg-desktop-portal
 cat > $home/.config/xdg-desktop-portal/niri-portals.conf <<EOF
 [preferred]
-default=gtk;
+default=wlr;gtk;
 org.freedesktop.impl.portal.FileChooser=gtk;
 org.freedesktop.impl.portal.OpenURI=gtk;
 EOF
