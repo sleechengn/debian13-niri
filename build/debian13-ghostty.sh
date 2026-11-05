@@ -48,7 +48,7 @@ cp -r zig-out/* deb-pkg/usr/local/
 #bash
 cat > deb-pkg/DEBIAN/control <<EOF
 Package: ghostty
-Version: 0.1.0-1
+Version: 1.4.0
 Section: utils
 Priority: optional
 Architecture: amd64
