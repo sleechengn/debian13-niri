@@ -3,8 +3,28 @@ set -x
 apt update
 apt install -y xz-utils aria2 git libgtk-4-dev \
     libgtk4-layer-shell-dev libadwaita-1-dev gettext \
-    libxml2-utils blueprint-compiler build-essential \
-    libc6-dev libx11-dev
+    libxml2-utils build-essential \
+    libc6-dev \
+    ninja-build \
+    libx11-dev \
+    python3-gi \
+    meson 
+cd /opt
+git clone https://gitlab.gnome.org/GNOME/blueprint-compiler.git
+cd blueprint-compiler
+meson setup _build --prefix=/usr/local
+ninja -C _build
+meson install -C _build
+
+sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/types.py
+sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/gir.py
+sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/expression.py
+sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/binding.py
+sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/gtk_menu.py
+
+export PYTHONPATH="/usr/local/lib/python3/dist-packages${PYTHONPATH:+:$PYTHONPATH}"
+python3 -m site
+blueprint-compiler --version
 git config --global --list | grep -F insteadOf | while IFS='=' read -r name value; do
 git config --global --unset $name
 done
