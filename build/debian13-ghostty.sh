@@ -35,6 +35,9 @@ git checkout v1.4.0
 rm -rf zig-out
 #zig fetch "https://deps.files.ghostty.org/vaxis-6fd944a27fb3d6f596e981076381a3131f2448b4.tar.gz"
 #zig fetch "https://deps.files.ghostty.org/z2d-40af3e84a4e15a9f31d126b3f281f23ce6a3dae5.tar.gz"
+#zig fetch "https://deps.files.ghostty.org/harfbuzz-11.0.0.tar.xz"
+#zig fetch "https://deps.files.ghostty.org/spirv_cross-1220fb3b5586e8be67bc3feb34cbe749cf42a60d628d2953632c2f8141302748c8da.tar.gz"
+#zig fetch "https://deps.files.ghostty.org/glslang-12201278a1a05c0ce0b6eb6026c65cd3e9247aa041b1c260324bf29cee559dd23ba1.tar.gz"
 #zig build -Doptimize=ReleaseFast -Dtarget=x86_64-linux-gnu
 zig build -Doptimize=ReleaseFast
 rm -rf deb-pkg
