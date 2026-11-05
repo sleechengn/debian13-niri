@@ -16,11 +16,11 @@ meson setup _build --prefix=/usr/local
 ninja -C _build
 meson install -C _build
 
-sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/types.py
-sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/gir.py
-sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/expression.py
-sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/binding.py
-sed "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/gtk_menu.py
+sed -i "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/types.py
+sed -i "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/gir.py
+sed -i "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/expression.py
+sed -i "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/binding.py
+sed -i "1i from __future__ import annotations" /usr/local/lib/python3/dist-packages/blueprintcompiler/language/gtk_menu.py
 
 export PYTHONPATH="/usr/local/lib/python3/dist-packages${PYTHONPATH:+:$PYTHONPATH}"
 python3 -m site
