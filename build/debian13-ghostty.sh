@@ -9,7 +9,6 @@ apt install -y xz-utils aria2 git libgtk-4-dev \
     ninja-build \
     python3-gi \
     libx11-dev
-    
 cd /opt
 git clone https://gitlab.gnome.org/GNOME/blueprint-compiler.git
 cd blueprint-compiler
