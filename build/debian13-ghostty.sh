@@ -4,11 +4,13 @@ apt update
 apt install -y xz-utils aria2 git libgtk-4-dev \
     libgtk4-layer-shell-dev libadwaita-1-dev gettext \
     libxml2-utils build-essential \
+    meson \
     libc6-dev \
     ninja-build \
-    libx11-dev \
     python3-gi \
-    meson 
+    libx11-dev \
+    
+    
 cd /opt
 git clone https://gitlab.gnome.org/GNOME/blueprint-compiler.git
 cd blueprint-compiler
