@@ -17,14 +17,14 @@ if [ -e "swww" ]; then
 fi
 git clone https://github.com/LGFae/swww
 cd swww
-#cargo build --release
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-#用bash执行，fish无法兼容source后面的环境 
+if [ ! -e "$HOME/.cargo/env" ]; then 
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 source "$HOME/.cargo/env"
 cargo install cargo-deb
 cargo deb -p swww
 cargo deb -p swww-daemon
-cargo deb -p common
-cargo deb -p tests
+#cargo deb -p common
+#cargo deb -p tests
 #再编译然后
 #cp target/release/swww target/release/swww-daemon /usr/local/bin/
