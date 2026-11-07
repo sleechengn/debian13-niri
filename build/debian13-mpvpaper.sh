@@ -29,9 +29,9 @@ Architecture: $(dpkg --print-architecture)
 Maintainer: Local Builder
 Description: Wallpaper video player for Wayland
 EOF
-mkdir target
+mkdir arch-build-deb
 dpkg-deb --build \
   /tmp/mpvpaper-pkg \
-  "/opt/mpvpaper/target/mpvpaper_1.0_$(dpkg --print-architecture).deb"
+  "/opt/mpvpaper/arch-build-deb/mpvpaper_1.0_$(dpkg --print-architecture).deb"
 #配置
 #mpvpaper -o "no-audio --loop" ALL /home/你的用户名/Videos/live.mp4
