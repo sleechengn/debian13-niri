@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 apt update
-apt install curl git cargo libxkbcommon-dev liblz4-dev pkg-config wayland-protocols -y
+apt install curl git libxkbcommon-dev liblz4-dev pkg-config wayland-protocols -y
 apt remove rustc cargo -y
 apt autoremove -y
 cd /opt
