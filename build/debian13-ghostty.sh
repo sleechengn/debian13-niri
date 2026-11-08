@@ -61,7 +61,7 @@ zig build -Doptimize=ReleaseFast
 rm -rf deb-pkg
 mkdir -p deb-pkg/DEBIAN
 mkdir -p deb-pkg/usr/local
-cp -r zig-out/* deb-pkg/usr/local/
+cp -r zig-out/* deb-pkg/usr/local
 #编辑deb-pkg/DEBIAN/control
 #bash
 cat > deb-pkg/DEBIAN/control <<EOF
