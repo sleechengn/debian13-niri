@@ -4,6 +4,13 @@ apt update
 apt install -y git checkinstall build-essential meson ninja-build \
     pkg-config libmpv-dev libwayland-dev wayland-protocols mpv
 cd /opt
+git config --global --list | grep -F insteadOf | while IFS='=' read -r name value; do
+git config --global --unset $name
+done
+curl -fsSL http://192.168.13.80:3000/sleechengn/github.com--GhostNaN--mpvpaper > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	git config --global url."http://192.168.13.80:3000/sleechengn/github.com--GhostNaN--mpvpaper".insteadOf https://github.com/GhostNaN/mpvpaper
+fi
 rm -rf mpvpaper
 git clone --single-branch --depth=1 https://github.com/GhostNaN/mpvpaper
 # Build
