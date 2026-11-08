@@ -17,7 +17,7 @@ if [ -e "swww" ]; then
 fi
 git clone https://github.com/LGFae/swww
 cd swww
-if [ ! -e "$HOME/.cargo/env" ]; then 
+if [ ! -e "$HOME/.cargo/env" ]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 source "$HOME/.cargo/env"
