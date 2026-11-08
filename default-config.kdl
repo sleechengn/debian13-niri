@@ -284,7 +284,7 @@ environment {
     // GTK 与 QT 程序兼容（必须写 fcitx，不能写 fcitx5）
     GTK_IM_MODULE "fcitx"
     QT_IM_MODULE "fcitx"
-
+    GDK_BACKEND "x11"
     // SDL 游戏与现代 GLFW 应用支持
     SDL_IM_MODULE "fcitx"
     GLFW_IM_MODULE "ibus"
@@ -380,9 +380,10 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+S { spawn "pcmanfm-qt"; }
-    Mod+E { spawn "flatpak" "run" "com.microsoft.Edge" "--proxy-server=http://192.168.12.254:20171" "--proxy-bypass-list=127.0.0.1;localhost;192.168.*"; }
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "ghostty"; }
+    Mod+S hotkey-overlay-title="open a file manager pcmanfmqt" { spawn "pcmanfm-qt"; }
+    Mod+E hotkey-overlay-title="open a web browser microsoft edge" { spawn "flatpak" "run" "com.microsoft.Edge" "--proxy-server=http://192.168.12.254:20171" "--proxy-bypass-list=127.0.0.1;localhost;192.168.*"; }
+    Mod+G hotkey-overlay-title="open a web browser google chrome" { spawn "flatpak" "run" "com.google.Chrome" "--proxy-server=http://192.168.12.254:20171" "--proxy-bypass-list=localhost;127.0.0.1;192.168.0.0/16;10.0.0.0/8;172.16.0.0/12"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
