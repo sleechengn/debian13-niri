@@ -16,7 +16,7 @@ apt install -y $PACK_PATH/swww-daemon_0.11.2~master2-1_amd64.deb
 apt install -y $PACK_PATH/xwayland-satellite_0.8.2-1_amd64.deb
 apt install -y $PACK_PATH/ghostty_0.1.0-1_amd64.deb
 
-apt install -y sudo bluez blueman pipewire-audio libspa-0.2-bluetooth xdg-desktop-portal xdg-desktop-portal-gtk
+apt install -y sudo bluez blueman pipewire-audio libspa-0.2-bluetooth xdg-desktop-portal xdg-desktop-portal-gtk mako-notifier
 apt install -y alacritty fuzzel swaybg waybar pcmanfm-qt xwayland
 apt install -y libpipewire-0.3-0 libpipewire-0.3-dev libdisplay-info2 libseat1 libinput10 libegl1 libegl-mesa0
 apt install -y pavucontrol pipewire pipewire-pulse wireplumber libgtk4-layer-shell0 xdg-desktop-portal-wlr
@@ -78,6 +78,8 @@ default=wlr;gtk;
 org.freedesktop.impl.portal.FileChooser=gtk;
 org.freedesktop.impl.portal.OpenURI=gtk;
 EOF
+mkdir -p $home/.config/mako
+printf 'default-timeout=5000\n' > $home/.config/mako/config
 
 chown -R $USERNAME:$USERNAME $home/.config
 systemctl --user -M $USERNAME@ enable --now xdg-desktop-portal-wlr xdg-desktop-portal xdg-desktop-portal-gtk
